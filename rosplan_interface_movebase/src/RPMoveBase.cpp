@@ -27,6 +27,10 @@ namespace KCL_rosplan {
 			ROS_INFO("KCL: (%s) aborting action dispatch; PDDL action missing required parameter ?to", params.name.c_str());
 			return false;
 		}
+
+		// clear costmaps
+		std_srvs::Empty emptySrv;
+		clear_costmaps_client.call(emptySrv);
 		
 		// get pose from message store
 		std::vector< boost::shared_ptr<geometry_msgs::PoseStamped> > results;
